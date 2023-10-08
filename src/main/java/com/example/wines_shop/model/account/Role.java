@@ -9,11 +9,11 @@ import javax.persistence.Id;
 public class Role {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private int idRole;
+    private Long idRole;
 
     private String nameRole;
 
-    public Role(int idRole, String nameRole) {
+    public Role(Long idRole, String nameRole) {
         this.idRole = idRole;
         this.nameRole = nameRole;
     }
@@ -21,11 +21,11 @@ public class Role {
     public Role() {
     }
 
-    public int getIdRole() {
+    public Long getIdRole() {
         return idRole;
     }
 
-    public void setIdRole(int idRole) {
+    public void setIdRole(Long idRole) {
         this.idRole = idRole;
     }
 

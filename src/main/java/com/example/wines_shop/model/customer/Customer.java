@@ -1,30 +1,35 @@
 package com.example.wines_shop.model.customer;
 
 import com.example.wines_shop.model.account.Account;
+import com.example.wines_shop.model.wines.Wines;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCustomer;
+    private Long idCustomer;
     private String nameCustomer;
     private String addressCustomer;
     private String emailCustomer;
     private String telCustomer;
     private String genderCustomer;
+    @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
     private Boolean flagCustomer;
 
     @OneToOne
-    private Account account;
+    @JoinColumn(name = "id_account")
+    private Account idAccount;
+
 
     public Customer() {
     }
 
-    public Customer(int idCustomer, String nameCustomer, String addressCustomer, String emailCustomer, String telCustomer, String genderCustomer, Date dayOfBirth, Boolean flagCustomer, Account account) {
+    public Customer(Long idCustomer, String nameCustomer, String addressCustomer, String emailCustomer, String telCustomer, String genderCustomer, Date dayOfBirth, Boolean flagCustomer, Account account) {
         this.idCustomer = idCustomer;
         this.nameCustomer = nameCustomer;
         this.addressCustomer = addressCustomer;
@@ -33,14 +38,14 @@ public class Customer {
         this.genderCustomer = genderCustomer;
         this.dayOfBirth = dayOfBirth;
         this.flagCustomer = flagCustomer;
-        this.account = account;
+        this.idAccount = account;
     }
 
-    public int getIdCustomer() {
+    public Long getIdCustomer() {
         return idCustomer;
     }
 
-    public void setIdCustomer(int idCustomer) {
+    public void setIdCustomer(Long idCustomer) {
         this.idCustomer = idCustomer;
     }
 
@@ -101,10 +106,10 @@ public class Customer {
     }
 
     public Account getAccount() {
-        return account;
+        return idAccount;
     }
 
     public void setAccount(Account account) {
-        this.account = account;
+        this.idAccount = account;
     }
 }

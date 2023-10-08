@@ -1,10 +1,9 @@
 package com.example.wines_shop.model.wines;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Wines {
@@ -14,6 +13,7 @@ public class Wines {
 
     private String nameWines;
     private Double priceWines;
+    @Column(columnDefinition = "longtext")
     private String DescriptionWines;
     private String manufactureWines;
     private String countryManufacture;
@@ -23,16 +23,15 @@ public class Wines {
     private String flavorWines;
     private String colorWines;
     private Integer alcohol;
-    private Date dateOfManufacture;
-    private Date expirationDate;
-    private Double flagWines;
+    private Boolean flagWines;
     @OneToOne
+    @JoinColumn(name = "id_type_wines")
     private TypeWines typeWines;
 
     public Wines() {
     }
 
-    public Wines(Long idWines, String nameWines, Double priceWines, String descriptionWines, String manufactureWines, String countryManufacture, String imageWines, Integer quantity, String flavorWines, String colorWines, Integer alcohol, Date dateOfManufacture, Date expirationDate, Double flagWines, TypeWines typeWines) {
+    public Wines(Long idWines, String nameWines, Double priceWines, String descriptionWines, String manufactureWines, String countryManufacture, String imageWines, Integer quantity, String flavorWines, String colorWines, Integer alcohol, Boolean flagWines, TypeWines typeWines) {
         this.idWines = idWines;
         this.nameWines = nameWines;
         this.priceWines = priceWines;
@@ -44,8 +43,6 @@ public class Wines {
         this.flavorWines = flavorWines;
         this.colorWines = colorWines;
         this.alcohol = alcohol;
-        this.dateOfManufacture = dateOfManufacture;
-        this.expirationDate = expirationDate;
         this.flagWines = flagWines;
         this.typeWines = typeWines;
     }
@@ -138,27 +135,11 @@ public class Wines {
         this.alcohol = alcohol;
     }
 
-    public Date getDateOfManufacture() {
-        return dateOfManufacture;
-    }
-
-    public void setDateOfManufacture(Date dateOfManufacture) {
-        this.dateOfManufacture = dateOfManufacture;
-    }
-
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public Double getFlagWines() {
+    public Boolean getFlagWines() {
         return flagWines;
     }
 
-    public void setFlagWines(Double flagWines) {
+    public void setFlagWines(Boolean flagWines) {
         this.flagWines = flagWines;
     }
 

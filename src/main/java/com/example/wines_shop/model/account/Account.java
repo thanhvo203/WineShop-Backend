@@ -6,39 +6,40 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idAccount;
+    private Long idAccount;
 
-    private String emailAccount;
+    private String email;
 
     private String password;
 
-    @ManyToOne
-    private Role role;
+    @OneToOne
+    @JoinColumn(name = "id_role")
+    private Role idRole;
 
     public Account() {
     }
 
-    public Account(int idAccount, String emailAccount, String password, Role role) {
+    public Account(Long idAccount, String email, String password, Role idRole) {
         this.idAccount = idAccount;
-        this.emailAccount = emailAccount;
+        this.email = email;
         this.password = password;
-        this.role = role;
+        this.idRole = idRole;
     }
 
-    public int getIdAccount() {
+    public Long getIdAccount() {
         return idAccount;
     }
 
-    public void setIdAccount(int idAccount) {
+    public void setIdAccount(Long idAccount) {
         this.idAccount = idAccount;
     }
 
-    public String getEmailAccount() {
-        return emailAccount;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAccount(String emailAccount) {
-        this.emailAccount = emailAccount;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -49,11 +50,11 @@ public class Account {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public Role getIdRole() {
+        return idRole;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setIdRole(Role idRole) {
+        this.idRole = idRole;
     }
 }

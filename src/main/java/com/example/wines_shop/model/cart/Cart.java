@@ -1,45 +1,44 @@
 package com.example.wines_shop.model.cart;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.wines_shop.model.customer.Customer;
+import com.example.wines_shop.model.wines.Wines;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Cart {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idCart;
-
-    private Double totalPrice;
+    private Long idCart;
 
     private Integer quality;
+    private Boolean status;
+    @OneToOne
+    @JoinColumn(name = "id_customer")
+    private Customer idCustomer;
+    @OneToOne
+    @JoinColumn(name = "id_wines")
+    private Wines wines;
 
-    public Cart(int idCart, Double totalPrice, Integer quality) {
+    public Cart(Long idCart, Integer quality, Boolean status, Customer idCustomer, Wines wines) {
         this.idCart = idCart;
-        this.totalPrice = totalPrice;
         this.quality = quality;
+        this.status = status;
+        this.idCustomer = idCustomer;
+        this.wines = wines;
     }
 
     public Cart() {
-
     }
 
-    public int getIdCart() {
+    public Long getIdCart() {
         return idCart;
     }
 
-    public void setIdCart(int idCart) {
+    public void setIdCart(Long idCart) {
         this.idCart = idCart;
-    }
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public Integer getQuality() {
@@ -48,5 +47,29 @@ public class Cart {
 
     public void setQuality(Integer quality) {
         this.quality = quality;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Customer getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(Customer idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Wines getWines() {
+        return wines;
+    }
+
+    public void setWines(Wines wines) {
+        this.wines = wines;
     }
 }

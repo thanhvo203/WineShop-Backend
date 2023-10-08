@@ -9,11 +9,11 @@ import javax.persistence.Id;
 public class TypeWines {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idTypeWines;
+    private Long idTypeWines;
 
     private String nameTypeWines;
 
-    public TypeWines(int idTypeWines, String nameTypeWines) {
+    public TypeWines(Long idTypeWines, String nameTypeWines) {
         this.idTypeWines = idTypeWines;
         this.nameTypeWines = nameTypeWines;
     }
@@ -21,11 +21,11 @@ public class TypeWines {
     public TypeWines() {
     }
 
-    public int getIdTypeWines() {
+    public Long getIdTypeWines() {
         return idTypeWines;
     }
 
-    public void setIdTypeWines(int idTypeWines) {
+    public void setIdTypeWines(Long idTypeWines) {
         this.idTypeWines = idTypeWines;
     }
 

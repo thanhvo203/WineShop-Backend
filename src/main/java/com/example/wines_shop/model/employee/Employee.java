@@ -9,24 +9,26 @@ import java.util.Date;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEmployee;
+    private Long idEmployee;
 
     private String nameEmployee;
     private String addressEmployee;
     private String telEmployee;
     private String emailEmployee;
+    @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
 
     private String genderEmployee;
 
     private Boolean flagEmployee;
     @OneToOne
+    @JoinColumn(name = "id_account")
     private Account account;
 
     public Employee() {
     }
 
-    public Employee(int idEmployee, String nameEmployee, String addressEmployee, String telEmployee, String emailEmployee, Date dayOfBirth, String genderEmployee, Boolean flagEmployee, Account account) {
+    public Employee(Long idEmployee, String nameEmployee, String addressEmployee, String telEmployee, String emailEmployee, Date dayOfBirth, String genderEmployee, Boolean flagEmployee, Account account) {
         this.idEmployee = idEmployee;
         this.nameEmployee = nameEmployee;
         this.addressEmployee = addressEmployee;
@@ -38,11 +40,11 @@ public class Employee {
         this.account = account;
     }
 
-    public int getIdEmployee() {
+    public Long getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(int idEmployee) {
+    public void setIdEmployee(Long idEmployee) {
         this.idEmployee = idEmployee;
     }
 
