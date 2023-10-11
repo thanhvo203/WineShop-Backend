@@ -8,9 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Role {
     @Id
-    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRole;
-
     private String nameRole;
 
     public Role(Long idRole, String nameRole) {

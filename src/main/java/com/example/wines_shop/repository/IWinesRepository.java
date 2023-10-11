@@ -1,7 +1,6 @@
 package com.example.wines_shop.repository;
 
 import com.example.wines_shop.model.wines.Wines;
-import jogamp.graph.font.typecast.ot.table.LigatureSet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

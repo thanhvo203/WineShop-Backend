@@ -1,6 +1,6 @@
 package com.example.wines_shop.model.employee;
 
-import com.example.wines_shop.model.account.Account;
+import com.example.wines_shop.model.account.Users;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,12 +23,12 @@ public class Employee {
     private Boolean flagEmployee;
     @OneToOne
     @JoinColumn(name = "id_account")
-    private Account account;
+    private Users users;
 
     public Employee() {
     }
 
-    public Employee(Long idEmployee, String nameEmployee, String addressEmployee, String telEmployee, String emailEmployee, Date dayOfBirth, String genderEmployee, Boolean flagEmployee, Account account) {
+    public Employee(Long idEmployee, String nameEmployee, String addressEmployee, String telEmployee, String emailEmployee, Date dayOfBirth, String genderEmployee, Boolean flagEmployee, Users users) {
         this.idEmployee = idEmployee;
         this.nameEmployee = nameEmployee;
         this.addressEmployee = addressEmployee;
@@ -37,7 +37,7 @@ public class Employee {
         this.dayOfBirth = dayOfBirth;
         this.genderEmployee = genderEmployee;
         this.flagEmployee = flagEmployee;
-        this.account = account;
+        this.users = users;
     }
 
     public Long getIdEmployee() {
@@ -104,11 +104,11 @@ public class Employee {
         this.flagEmployee = flagEmployee;
     }
 
-    public Account getAccount() {
-        return account;
+    public Users getAccount() {
+        return users;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccount(Users users) {
+        this.users = users;
     }
 }

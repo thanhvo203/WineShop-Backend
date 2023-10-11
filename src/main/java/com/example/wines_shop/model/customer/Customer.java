@@ -1,11 +1,9 @@
 package com.example.wines_shop.model.customer;
 
-import com.example.wines_shop.model.account.Account;
-import com.example.wines_shop.model.wines.Wines;
+import com.example.wines_shop.model.account.Users;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Customer {
@@ -23,13 +21,13 @@ public class Customer {
 
     @OneToOne
     @JoinColumn(name = "id_account")
-    private Account idAccount;
+    private Users idUsers;
 
 
     public Customer() {
     }
 
-    public Customer(Long idCustomer, String nameCustomer, String addressCustomer, String emailCustomer, String telCustomer, String genderCustomer, Date dayOfBirth, Boolean flagCustomer, Account account) {
+    public Customer(Long idCustomer, String nameCustomer, String addressCustomer, String emailCustomer, String telCustomer, String genderCustomer, Date dayOfBirth, Boolean flagCustomer, Users users) {
         this.idCustomer = idCustomer;
         this.nameCustomer = nameCustomer;
         this.addressCustomer = addressCustomer;
@@ -38,7 +36,7 @@ public class Customer {
         this.genderCustomer = genderCustomer;
         this.dayOfBirth = dayOfBirth;
         this.flagCustomer = flagCustomer;
-        this.idAccount = account;
+        this.idUsers = users;
     }
 
     public Long getIdCustomer() {
@@ -105,11 +103,11 @@ public class Customer {
         this.flagCustomer = flagCustomer;
     }
 
-    public Account getAccount() {
-        return idAccount;
+    public Users getAccount() {
+        return idUsers;
     }
 
-    public void setAccount(Account account) {
-        this.idAccount = account;
+    public void setAccount(Users users) {
+        this.idUsers = users;
     }
 }
