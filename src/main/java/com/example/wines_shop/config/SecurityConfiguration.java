@@ -21,23 +21,28 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-//                .csrf()
-//                .disable()
-//                .authorizeRequests()
-//                .antMatchers("/wines/api/v1/auth/**")
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .anyRequest().permitAll()
+                .antMatchers(
+                        "/wines",
+                        "/wines/products",
+                        "/wines/detail-product/**",
+                        "/wines/api/v1/auth/**",
+                        "/wines/cart/list/**")
+                .permitAll()
+                .antMatchers("/wines/cart/add",
+                        "/wines/cart/delete/{id}",
+                        "/wines/cart/update/{id}").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
+                .antMatchers("/wines/create","/wines/update","/wines/delete").hasAuthority("ROLE_ADMIN")
+                .anyRequest()
+                .authenticated()
                 .and()
-                .csrf().disable();
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 }

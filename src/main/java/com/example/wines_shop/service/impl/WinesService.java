@@ -25,7 +25,12 @@ public class WinesService implements IWinesService {
     }
 
     @Override
-    public Page<Wines> getListWines(Pageable pageable) {
-        return iWinesRepository.getListWines(pageable);
+    public Page<Wines> getListWines(Pageable pageable, int firstAlcohol,
+                                    int lastAlcohol,
+                                     String color,
+                                     String flavor,
+                                     String country,
+                                    String idType) {
+        return iWinesRepository.getListWines(pageable,firstAlcohol,lastAlcohol,color,flavor,country,idType);
     }
 }

@@ -12,24 +12,14 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOrder;
-    private String nameOrder;
-    private String addressOrder;
-    private String telOrder;
-    private Boolean status;
     private Date dateOrder;
-    private Double priceOrder;
     @ManyToOne
     @JoinColumn(name = "id_customer")
     private Customer idCustomer;
 
-    public Orders(Long idOrder, String nameOrder, String addressOrder, String telOrder, Boolean status, Date dateOrder, Double priceOrder, Customer idCustomer) {
+    public Orders(Long idOrder, Date dateOrder, Customer idCustomer) {
         this.idOrder = idOrder;
-        this.nameOrder = nameOrder;
-        this.addressOrder = addressOrder;
-        this.telOrder = telOrder;
-        this.status = status;
         this.dateOrder = dateOrder;
-        this.priceOrder = priceOrder;
         this.idCustomer = idCustomer;
     }
 
@@ -44,52 +34,12 @@ public class Orders {
         this.idOrder = idOrder;
     }
 
-    public String getNameOrder() {
-        return nameOrder;
-    }
-
-    public void setNameOrder(String nameOrder) {
-        this.nameOrder = nameOrder;
-    }
-
-    public String getAddressOrder() {
-        return addressOrder;
-    }
-
-    public void setAddressOrder(String addressOrder) {
-        this.addressOrder = addressOrder;
-    }
-
-    public String getTelOrder() {
-        return telOrder;
-    }
-
-    public void setTelOrder(String telOrder) {
-        this.telOrder = telOrder;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     public Date getDateOrder() {
         return dateOrder;
     }
 
     public void setDateOrder(Date dateOrder) {
         this.dateOrder = dateOrder;
-    }
-
-    public Double getPriceOrder() {
-        return priceOrder;
-    }
-
-    public void setPriceOrder(Double priceOrder) {
-        this.priceOrder = priceOrder;
     }
 
     public Customer getIdCustomer() {
@@ -99,5 +49,4 @@ public class Orders {
     public void setIdCustomer(Customer idCustomer) {
         this.idCustomer = idCustomer;
     }
-
 }

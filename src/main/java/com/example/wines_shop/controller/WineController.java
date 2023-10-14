@@ -25,10 +25,18 @@ public class WineController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<Page<Wines>> getListWinesPage(@PageableDefault(size = 12)Pageable pageable) {
-        Page<Wines> wines = iWinesService.getListWines(pageable);
+    public ResponseEntity<Page<Wines>> getListWinesPage(@PageableDefault(size = 9)Pageable pageable,
+                                                        @RequestParam("firstAlcohol") String firstAlcohol,
+                                                        @RequestParam("lastAlcohol") String lastAlcohol,
+                                                        @RequestParam("color") String color,
+                                                        @RequestParam("flavor") String flavor,
+                                                        @RequestParam("country") String country,
+                                                        @RequestParam("idType") String idType) {
+        int first = Integer.parseInt(firstAlcohol);
+        int last = Integer.parseInt(lastAlcohol);
+        Page<Wines> wines = iWinesService.getListWines(pageable,first,last,color,flavor,country,idType);
         if (wines.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(iWinesService.getListWines(pageable),HttpStatus.OK);
+        return new ResponseEntity<>(wines,HttpStatus.OK);
     }
 
     @GetMapping("/detail-product/{id}")

@@ -1,11 +1,13 @@
 package com.example.wines_shop.model.customer;
 
 import com.example.wines_shop.model.account.Users;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Builder
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,5 +9,10 @@ import java.util.List;
 public interface IWinesService {
     List<Wines> findAllByFlagDeletedIsFalse();
     Wines getWinesById (Long id);
-    Page<Wines> getListWines (Pageable pageable);
+    Page<Wines> getListWines (Pageable pageable,int firstAlcohol,
+                              int lastAlcohol,
+                              String color,
+                              String flavor,
+                              String country,
+                              String idType);
 }

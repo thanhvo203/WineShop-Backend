@@ -3,6 +3,7 @@ package com.example.wines_shop.auth;
 import com.example.wines_shop.config.JwtService;
 import com.example.wines_shop.model.account.Role;
 import com.example.wines_shop.model.account.Users;
+import com.example.wines_shop.model.customer.Customer;
 import com.example.wines_shop.repository.UserRepository;
 import com.example.wines_shop.service.IRoleService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ public class AuthenticationService {
                 .idRole(iRoleService.findByName("ROLE_USER").get())
                 .build();
         userRepository.save(user);
+//        var customer = Customer.builder()
+//                .addressCustomer()
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
