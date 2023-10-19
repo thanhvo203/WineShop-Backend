@@ -9,10 +9,11 @@ import java.util.List;
 public interface IWinesService {
     List<Wines> findAllByFlagDeletedIsFalse();
     Wines getWinesById (Long id);
+    Wines getLargestPrice();
     Page<Wines> getListWines (Pageable pageable,int firstAlcohol,
                               int lastAlcohol,
                               String color,
                               String flavor,
                               String country,
-                              String idType);
+                              String nameType,String nameWines, int minPrice,int maxPrice);
 }

@@ -23,8 +23,8 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public void deleteWinesInCart(Long idWines) {
-       cartRepository.deleteWinesInCart(idWines);
+    public void deleteWinesInCart(Long idWines,Long idCustomer) {
+       cartRepository.deleteWinesInCart(idWines,idCustomer);
     }
 
     @Override

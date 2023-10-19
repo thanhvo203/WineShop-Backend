@@ -15,34 +15,34 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface ICartRepository extends JpaRepository<Cart,Long> {
+public interface ICartRepository extends JpaRepository<Cart, Long> {
 
-    @Query(nativeQuery = true,value = "select * from cart\n" +
-            "            left join customer c on c.id_customer = cart.id_customer\n" +
-            "            left join account a on a.id_account = c.id_account\n" +
-            "            left join wines w on w.id_wines = cart.id_wines\n" +
-            "            where a.id_account = :idAccount\n" +
-            "            and cart.status = 0 ")
-    List<Cart> findAllByIdCustomerAndStatusIsFalse(@Param("id") Long id);
+    @Query(nativeQuery = true, value = "select * from cart\n" +
+            "                        left join customer c on c.id_customer = cart.id_customer\n" +
+            "                        left join account a on a.id_account = c.id_account\n" +
+            "                        left join wines w on w.id_wines = cart.id_wines\n" +
+            "                        where a.id_account = :idAccount\n" +
+            "                        and cart.status = 0\n" +
+            "order by cart.id_cart desc ")
+    List<Cart> findAllByIdCustomerAndStatusIsFalse(@Param("idAccount") Long id);
 
     @Modifying
-    @Query(nativeQuery = true,value = "insert into cart ( quality, status, id_customer, id_wines)\n" +
-            "VALUES (:quality,0,:idCustomer,:idWines) " +
+    @Query(nativeQuery = true, value = "insert into cart ( quality, status, id_customer, id_wines)\n" +
+            "VALUES (:newQuality,0,:idCustomer,:idWines) " +
             "ON DUPlICATE KEY UPDATE quality = quality + :newQuality")
-    void addToCart(@Param("quality") Integer quality, @Param("idCustomer") Long idCustomer,@Param("idWines") Long idWines);
+    void addToCart(@Param("newQuality") Integer quality, @Param("idCustomer") Long idCustomer, @Param("idWines") Long idWines);
 
     @Modifying
-    @Query(nativeQuery = true,value = "update cart set\n" +
+    @Query(nativeQuery = true, value = "update cart set\n" +
             "cart.quality = :newQuantity,\n" +
             "cart.id_wines = :idWines,\n" +
             "cart.id_customer = :idCustomer\n" +
-            "where id_cart = :idCart" )
-    void updateQuantityCart(@Param("newQuantity") Integer newQuantity, @Param("idCustomer") Long idCustomer,@Param("idWines") Long idWines,@Param("idCart") Long idCart);
+            "where id_cart = :idCart")
+    void updateQuantityCart(@Param("newQuantity") Integer newQuantity, @Param("idCustomer") Long idCustomer, @Param("idWines") Long idWines, @Param("idCart") Long idCart);
 
     @Modifying
-    @Query(nativeQuery = true,value = "update cart set cart.status = 1\n" +
-            "where cart.id_wines = :idWines ")
-    void deleteWinesInCart(@Param("idWines") Long idWines);
+    @Query(nativeQuery = true, value = "delete from cart where cart.id_wines = :idWines and cart.id_customer = :idCustomer")
+    void deleteWinesInCart(@Param("idWines") Long idWines,@Param("idCustomer") Long idCustomer);
 
 
 }

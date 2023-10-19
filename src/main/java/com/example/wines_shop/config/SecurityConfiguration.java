@@ -29,12 +29,11 @@ public class SecurityConfiguration {
                         "/wines/products",
                         "/wines/detail-product/**",
                         "/wines/api/v1/auth/**",
-                        "/wines/cart/list/**")
+                        "/wines/cart/**",
+                        "/wines/customer/**",
+                        "/wines/largest-price")
                 .permitAll()
-                .antMatchers("/wines/cart/add",
-                        "/wines/cart/delete/{id}",
-                        "/wines/cart/update/{id}").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
-                .antMatchers("/wines/create","/wines/update","/wines/delete").hasAuthority("ROLE_ADMIN")
+
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -43,6 +42,11 @@ public class SecurityConfiguration {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//                httpSecurity
+//                .authorizeRequests()
+//                .anyRequest().permitAll()
+//                .and()
+//                .csrf().disable();
         return httpSecurity.build();
     }
 }

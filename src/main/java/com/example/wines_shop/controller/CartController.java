@@ -16,36 +16,36 @@ public class CartController {
     @Autowired
     private ICartService iCartService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Cart>>findAllCartByCustomerId(@RequestParam("id") Long id) {
-        if (iCartService.findAllByIdCustomerAndStatusIsFalse(id).isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(iCartService.findAllByIdCustomerAndStatusIsFalse(id),HttpStatus.OK);
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<Cart>> findAllCartByCustomerId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(iCartService.findAllByIdCustomerAndStatusIsFalse(id), HttpStatus.OK);
     }
-    @PostMapping("/add")
-    public ResponseEntity<HttpStatus> addToCart(@RequestParam("quality")Integer quality,
-                                       @RequestParam("idCustomer") Long idCustomer,
-                                       @RequestParam("idWines") Long idWines) {
+
+    @PostMapping("/add/{quality}/{idCustomer}/{idWines}")
+    public ResponseEntity<HttpStatus> addToCart(@PathVariable("quality") Integer quality,
+                                                @PathVariable("idCustomer") Long idCustomer,
+                                                @PathVariable("idWines") Long idWines) {
         if (idCustomer != null && idWines != null) {
-            iCartService.addToCart(quality,idCustomer,idWines);
+            iCartService.addToCart(quality, idCustomer, idWines);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    @PatchMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteWineFromCart(@PathVariable("id") Long idWines) {
-        if (idWines != null){
-            iCartService.deleteWinesInCart(idWines);
+
+    @DeleteMapping("/delete/{idWines}")
+    public ResponseEntity<HttpStatus> deleteWineFromCart(@PathVariable("idWines") Long idWines,@RequestParam("idCustomer")Long idCustomer) {
+        if (idWines != null) {
+            iCartService.deleteWinesInCart(idWines,idCustomer);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     @PatchMapping("/update/{id}")
     public ResponseEntity<HttpStatus> updateCart(@PathVariable("id") Long idCart,
                                                  @RequestParam("newQuantity") Integer newQuantity,
-                                                 @RequestParam("idWines")Long idWines,
-                                                 @RequestParam("idCustomer")Long idCustomer) {
+                                                 @RequestParam("idWines") Long idWines,
+                                                 @RequestParam("idCustomer") Long idCustomer) {
         if (idCart != null) {
             iCartService.updateQuantityCart(newQuantity, idCustomer, idWines, idCart);
             return new ResponseEntity<>(HttpStatus.OK);

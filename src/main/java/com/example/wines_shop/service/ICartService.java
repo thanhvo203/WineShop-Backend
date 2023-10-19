@@ -10,6 +10,6 @@ public interface ICartService {
 
     List<Cart> findAllByIdCustomerAndStatusIsFalse(Long id);
     void addToCart(Integer quality,Long idCustomer, Long idWines);
-    void deleteWinesInCart(Long idWines);
+    void deleteWinesInCart(Long idWines,Long idCustomer);
     void updateQuantityCart(Integer quality, Long idCustomer,  Long idWines,  Long idCart);
 }

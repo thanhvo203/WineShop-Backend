@@ -25,12 +25,17 @@ public class WinesService implements IWinesService {
     }
 
     @Override
+    public Wines getLargestPrice() {
+        return iWinesRepository.getLargestPrice();
+    }
+
+    @Override
     public Page<Wines> getListWines(Pageable pageable, int firstAlcohol,
                                     int lastAlcohol,
                                      String color,
                                      String flavor,
                                      String country,
-                                    String idType) {
-        return iWinesRepository.getListWines(pageable,firstAlcohol,lastAlcohol,color,flavor,country,idType);
+                                    String nameType,String nameWines,int minPrice,int maxPrice) {
+        return iWinesRepository.getListWines(pageable,firstAlcohol,lastAlcohol,color,flavor,country,nameType,nameWines,minPrice,maxPrice);
     }
 }
