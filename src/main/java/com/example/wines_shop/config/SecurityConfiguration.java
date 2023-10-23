@@ -31,7 +31,10 @@ public class SecurityConfiguration {
                         "/wines/api/v1/auth/**",
                         "/wines/cart/**",
                         "/wines/customer/**",
-                        "/wines/largest-price")
+                        "/wines/largest-price",
+                        "/wines/order/**",
+                        "/wines/order-detail/**",
+                        "/wines/update-quantity")
                 .permitAll()
 
                 .anyRequest()

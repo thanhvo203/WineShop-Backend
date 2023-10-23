@@ -4,6 +4,7 @@ import com.example.wines_shop.model.wines.Wines;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -50,6 +51,12 @@ public interface IWinesRepository extends JpaRepository<Wines, Long> {
                               @Param("country") String country,
                               @Param("nameType") String nameType,@Param("nameWines") String nameWines,
                               @Param("minPrice") int minPrice,@Param("maxPrice") int maxPrice);
+    @Modifying
+    @Query(nativeQuery = true, value = "UPDATE wines\n" +
+            "SET quantity = GREATEST(quantity - :newQuantity, 0)\n" +
+            "WHERE id_wines = :idWines ")
+    void updateQuantityWines(@Param("newQuantity") Integer newQuantity, @Param("idWines") Long idWines);
+
 
 
 

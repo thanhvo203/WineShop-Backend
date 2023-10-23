@@ -56,6 +56,16 @@ public class WineController {
         return new ResponseEntity<>(iWinesService.getWinesById(id),HttpStatus.OK);
     }
 
+    @PatchMapping("/update-quantity")
+    public ResponseEntity<?> updateQuantityWines(@RequestParam("newQuantity") Integer newQuantity,
+                                                 @RequestParam("idWines") Long idWines) {
+        if (idWines != null){
+            iWinesService.updateQuantityWines(newQuantity,idWines);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 
 
 }

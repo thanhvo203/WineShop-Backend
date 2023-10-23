@@ -38,4 +38,9 @@ public class WinesService implements IWinesService {
                                     String nameType,String nameWines,int minPrice,int maxPrice) {
         return iWinesRepository.getListWines(pageable,firstAlcohol,lastAlcohol,color,flavor,country,nameType,nameWines,minPrice,maxPrice);
     }
+
+    @Override
+    public void updateQuantityWines(Integer newQuantity, Long idWines) {
+        iWinesRepository.updateQuantityWines(newQuantity, idWines);
+    }
 }
