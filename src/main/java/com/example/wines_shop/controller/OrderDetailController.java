@@ -1,6 +1,7 @@
 package com.example.wines_shop.controller;
 
 
+import com.example.wines_shop.model.cart.OrderDetails;
 import com.example.wines_shop.service.IOrderDetailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -27,5 +30,12 @@ public class OrderDetailController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    @GetMapping("/detail-history")
+    public ResponseEntity<List<OrderDetails>> getListHistory(@RequestParam("id") Long id) {
+        if (id != null) {
+            return new ResponseEntity<>(iOrderDetailService.listDetailHistory(id),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
